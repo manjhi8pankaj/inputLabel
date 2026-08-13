@@ -53,7 +53,7 @@ body {
   display: grid;
   place-items: center;
   padding: 24px;
-  background-position: -130px -200px;
+  background-position: -160px 100%;
   /* background-size: cover, auto, auto; */
 }
 
@@ -81,18 +81,19 @@ body::before {
 body::after {
   bottom: 48px;
   right: 48px;
-  width: 75px;
-  height: 42px;
+  width: 80px;
+  height: 64px;
   -webkit-mask: url(https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/vic-logo.svg) center/contain no-repeat;
   mask: url(https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/vic-logo.svg) center/contain no-repeat;
-  background-color: black
+  background-color: black;
+  padding-right: 200px;
 }
 
 @media (min-width: 1250px) and (min-height: 800px),
 (min-width: 1050px) and (max-height: 800px),
 (min-height: 0px) and (max-height: 516px) {
   body::after {
-    background-color: white;
+    background-color: #000;
   }
 }
 
@@ -168,7 +169,7 @@ input[readonly] {
 
 div.error.itemLevel>p {
   margin: 4px 0;
-  color: #EB0000;
+  color: #8A2A2B;
   font-size: 14px;
 }
 
@@ -243,7 +244,7 @@ button {
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.45;
-  margin: 4px 0 20px 0;
+  margin: 4px 0 0 0;
 }
 
 #api .helptext,
@@ -277,7 +278,7 @@ div#passwordEntryMismatch {
 .pw-hint.is-error,
 div#passwordEntryMismatch,
 :is(#page-newpassword, #page-password) #api div#fieldIncorrect {
-  color: #EB0000;
+  color: #8A2A2B;
 }
 
 .pw-hint {
@@ -463,32 +464,53 @@ a.btn:focus {
   display: none !important;
 }
 
+.entry-item {
+  display: grid;
+  grid-template-columns: 1fr;
+}
 
+/* Email/password label */
+.entry-item > label,
+.entry-item > .password-label {
+  grid-row: 1;
+}
 
+/* Put the input before the error message */
+.entry-item > input {
+  grid-row: 2;
+}
 
+/* Error appears directly below input */
+.entry-item > .error.itemLevel {
+  grid-row: 3;
+  margin-top: 4px;
+}
 
+/* Set the input border color when it has an error */
+.highlightError {
+  border: 1px solid #8A2A2B !important
+}
 
+#api .pageLevel {
+   border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 16px;
+}
 
+#claimVerificationServerError, #fieldIncorrect, #passwordEntryMismatch {
+  padding: 16px;
+  margin-top: 16px;
+}
 
+.attrEntry {
+    display: flex;
+    flex-direction: column;
+}
 
+.attrEntry > input {
+    order: 2;
+}
 
-
-
-<form id="attributeVerification" action="JavaScript:void(0);">
-        <div id="passwordEntryMismatch" class="error pageLevel" style="display: none;" aria-hidden="true">The password entry fields do not match. Please enter the same password in both fields and try again.</div>
-        <div id="requiredFieldMissing" class="error pageLevel" style="display: none;" aria-hidden="true">A required field is missing. Please fill out all required fields and try again.</div>
-        <div id="fieldIncorrect" class="error pageLevel" style="display: block;" aria-hidden="false" role="alert">One or more fields are filled out incorrectly. Please check your entries and try again.</div>
-        <div id="claimVerificationServerError" class="error pageLevel" style="display: none;" aria-hidden="true"></div>
-        <div id="attributeList" class="attr">
-            <ul>
-                <li class="Readonly email_li"><div class="attrEntry validate"><label id="email_label" for="email">Email Address</label><div class="error itemLevel show" role="alert" aria-hidden="false" aria-label="">Please enter a valid email address.</div><input id="email" class="textInput" type="text" placeholder="Email Address" aria-label="Email Address" value="ia_1.smu_user@fes.justice.vic.gov.au@gmail.com" pattern="^[a-zA-Z0-9!#$%&amp;'+^_`{}~-]+(?:\.[a-zA-Z0-9!#$%&amp;'+^_`{}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$" title="Email address that can be used to contact you." aria-required="true" disabled="disabled" readonly="readonly" autofocus="autofocus"><a class="helpLink tiny" href="javascript:void(0)" data-help="Email address that can be used to contact you.">What is this?</a></div></li>
-            </ul>
-        </div>
-        <div class="buttons">
-            <button id="continue" type="submit" form="attributeVerification" aria-disabled="false" aria-label="Continue">Continue</button>
-        </div>
-
-        <div class="verifying-modal">
-            <div id="verifying_blurb"></div>
-        </div>
-    </form>
+.attrEntry > .error.itemLevel {
+    order: 3;
+}
