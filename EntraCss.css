@@ -462,3 +462,52 @@ a.btn:focus {
 :is(#page-emailotp, #page-phone, #page-pwreset-otp) button[id$="_but_send_code"], [id$="_success_message"] {
   display: none !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+<form id="localAccountForm" action="JavaScript:void(0);" class="localAccount" aria-label="Enter your email address and password to sign in.">
+        <div class="intro">
+          <h2 aria-level="1">
+            Enter your email address and password to sign in.
+          </h2>
+        </div>
+        <div class="error pageLevel" aria-hidden="true" role="alert" style="display: none;">
+          <p></p>
+        </div>
+        <div class="entry">
+          <div class="entry-item">
+            <label for="signInName">
+              Email address
+            </label>
+            <div class="error itemLevel" aria-hidden="false" role="alert" style="display: block;">
+              <p>Please enter your Email address</p>
+            </div>
+            <input type="text" id="signInName" name="Email address" title="Please enter a valid Email address" autofocus="" placeholder="Email address" aria-label="Email address" class="highlightError">
+          </div>
+            <div class="entry-item">
+              <div class="password-label">
+                <label for="password">Password</label>
+              </div>
+              <div class="error itemLevel" aria-hidden="false" style="display: block;">
+                <p role="alert">Please enter your password</p>
+              </div>
+              <input type="password" id="password" name="Password" placeholder="Password" aria-label="Password" autocomplete="current-password" aria-required="true" class="highlightError">
+                  <a id="forgotPassword" href="/fesb2c.onmicrosoft.com/B2C_1A_dev_debtor_signin/api/CombinedSigninAndSignup/unified?claimsexchange=ForgotPasswordExchange&amp;csrf_token=RW82U0VhbUl1VnJoT0srNDJhbDVzaXUrd1NwWHVWcFlWUTlnQklnb1M4RjBoUDB2UEE3SDRieUZNdHFDR1dlT1RmRGU3UUpIRU0ybG5CRGVoNEZVUVE9PTsyMDI2LTA4LTEzVDAyOjA4OjIwLjQ5MDM0MjdaO2IxVE9IOHVvc0UzZDdrK2JCL0JiZHc9PTt7Ik9yY2hlc3RyYXRpb25TdGVwIjoxfQ==&amp;tx=StateProperties=eyJUSUQiOiJjYTVlN2E5Mi00ZmEyLTQwOTEtOGZlOS04ODhkNDgzY2EyNjYifQ&amp;p=B2C_1A_dev_debtor_signin">Forgot your password?</a>
+            </div>
+          <div class="working"></div>
+
+
+          <div class="buttons">
+            <button id="next" type="submit" form="localAccountForm">Sign in</button>
+          </div>
+        </div>
+      </form>
