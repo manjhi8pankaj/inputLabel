@@ -474,40 +474,21 @@ a.btn:focus {
 
 
 
-<form id="localAccountForm" action="JavaScript:void(0);" class="localAccount" aria-label="Enter your email address and password to sign in.">
-        <div class="intro">
-          <h2 aria-level="1">
-            Enter your email address and password to sign in.
-          </h2>
+<form id="attributeVerification" action="JavaScript:void(0);">
+        <div id="passwordEntryMismatch" class="error pageLevel" style="display: none;" aria-hidden="true">The password entry fields do not match. Please enter the same password in both fields and try again.</div>
+        <div id="requiredFieldMissing" class="error pageLevel" style="display: none;" aria-hidden="true">A required field is missing. Please fill out all required fields and try again.</div>
+        <div id="fieldIncorrect" class="error pageLevel" style="display: block;" aria-hidden="false" role="alert">One or more fields are filled out incorrectly. Please check your entries and try again.</div>
+        <div id="claimVerificationServerError" class="error pageLevel" style="display: none;" aria-hidden="true"></div>
+        <div id="attributeList" class="attr">
+            <ul>
+                <li class="Readonly email_li"><div class="attrEntry validate"><label id="email_label" for="email">Email Address</label><div class="error itemLevel show" role="alert" aria-hidden="false" aria-label="">Please enter a valid email address.</div><input id="email" class="textInput" type="text" placeholder="Email Address" aria-label="Email Address" value="ia_1.smu_user@fes.justice.vic.gov.au@gmail.com" pattern="^[a-zA-Z0-9!#$%&amp;'+^_`{}~-]+(?:\.[a-zA-Z0-9!#$%&amp;'+^_`{}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$" title="Email address that can be used to contact you." aria-required="true" disabled="disabled" readonly="readonly" autofocus="autofocus"><a class="helpLink tiny" href="javascript:void(0)" data-help="Email address that can be used to contact you.">What is this?</a></div></li>
+            </ul>
         </div>
-        <div class="error pageLevel" aria-hidden="true" role="alert" style="display: none;">
-          <p></p>
+        <div class="buttons">
+            <button id="continue" type="submit" form="attributeVerification" aria-disabled="false" aria-label="Continue">Continue</button>
         </div>
-        <div class="entry">
-          <div class="entry-item">
-            <label for="signInName">
-              Email address
-            </label>
-            <div class="error itemLevel" aria-hidden="false" role="alert" style="display: block;">
-              <p>Please enter your Email address</p>
-            </div>
-            <input type="text" id="signInName" name="Email address" title="Please enter a valid Email address" autofocus="" placeholder="Email address" aria-label="Email address" class="highlightError">
-          </div>
-            <div class="entry-item">
-              <div class="password-label">
-                <label for="password">Password</label>
-              </div>
-              <div class="error itemLevel" aria-hidden="false" style="display: block;">
-                <p role="alert">Please enter your password</p>
-              </div>
-              <input type="password" id="password" name="Password" placeholder="Password" aria-label="Password" autocomplete="current-password" aria-required="true" class="highlightError">
-                  <a id="forgotPassword" href="/fesb2c.onmicrosoft.com/B2C_1A_dev_debtor_signin/api/CombinedSigninAndSignup/unified?claimsexchange=ForgotPasswordExchange&amp;csrf_token=RW82U0VhbUl1VnJoT0srNDJhbDVzaXUrd1NwWHVWcFlWUTlnQklnb1M4RjBoUDB2UEE3SDRieUZNdHFDR1dlT1RmRGU3UUpIRU0ybG5CRGVoNEZVUVE9PTsyMDI2LTA4LTEzVDAyOjA4OjIwLjQ5MDM0MjdaO2IxVE9IOHVvc0UzZDdrK2JCL0JiZHc9PTt7Ik9yY2hlc3RyYXRpb25TdGVwIjoxfQ==&amp;tx=StateProperties=eyJUSUQiOiJjYTVlN2E5Mi00ZmEyLTQwOTEtOGZlOS04ODhkNDgzY2EyNjYifQ&amp;p=B2C_1A_dev_debtor_signin">Forgot your password?</a>
-            </div>
-          <div class="working"></div>
 
-
-          <div class="buttons">
-            <button id="next" type="submit" form="localAccountForm">Sign in</button>
-          </div>
+        <div class="verifying-modal">
+            <div id="verifying_blurb"></div>
         </div>
-      </form>
+    </form>
