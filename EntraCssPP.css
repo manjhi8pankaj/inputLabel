@@ -1,0 +1,495 @@
+:root {
+  --bg: #0a6db7;
+  /* primary background */
+  --bg2: #0b5fa1;
+  /* gradient shade */
+  --card: transparent;
+  /* card background */
+  --text: #FFFFFF;
+  /* headings/text */
+  --muted: #6c8195;
+  /* helper text */
+  --brand: #004C97;
+  /* button */
+  --brand-focus: #0072CE;
+  /* button focus/hover */
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .15);
+  --white: #ffffff;
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+}
+
+/* Font-face declaration */
+@font-face {
+  font-family: "VIC Regular";
+  src: url('https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/fonts/WEBFONT/Regular/VIC-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VIC SemiBold";
+  src: url('https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/fonts/WEBFONT/SemiBold/VIC-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font: 16px/1.45 "VIC Regular", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  background:
+    url('https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/Publiclandingpage.svg') center top no-repeat,
+    radial-gradient(1200px 1200px at 85% -20%, var(--bg2), transparent 50%),
+    linear-gradient(180deg, var(--bg), #075fa3);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background-size: cover, auto, auto;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 10;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: invert(1) brightness(10);
+  /* Makes logos appear white */
+}
+
+/* Top left logo */
+body::before {
+  top: 48px;
+  left: 48px;
+  width: 175px;
+  height: 62px;
+  background-image: url('https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/Logo.svg');
+}
+
+/* Bottom right logo */
+body::after {
+  bottom: 48px;
+  right: 48px;
+  width: 80px;
+  height: 64px;
+  -webkit-mask: url(https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/vic-logo.svg) center/contain no-repeat;
+  mask: url(https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/vic-logo.svg) center/contain no-repeat;
+  background-color: black;
+  padding-right: 200px;
+}
+
+.card {
+  width: min(580px, 92vw);
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px 48px;
+  border: 1px solid var(--white);
+  border-radius: 48px;
+}
+
+h1 {
+  font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  /* margin: 14px 0 24px; */
+  color: var(--white);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 14px;
+  height: 36px;
+}
+
+.center {
+  text-align: center;
+}
+
+.small {
+  font-size: .9rem;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-top: 6px;
+  margin-bottom: 36px;
+}
+
+label,
+#api label,
+#page-signin #api div.intro {
+  display: block;
+  font-family: "VIC Regular", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin: .75rem 0 .25rem;
+}
+
+input,
+#api input[type="email"],
+#api input[type="text"],
+#api input[type="password"] {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #c9d6e2;
+  border-radius: 5px;
+  padding: 0 12px;
+  font-size: 16px;
+}
+
+input[readonly] {
+  background: #f6f9fc;
+  color: #5d6d7e;
+}
+
+div.error.itemLevel>p {
+  margin: 4px 0;
+  color: #E58F8E;
+  font-size: 14px;
+}
+
+/* Set the input border color when it has an error */
+.highlightError {
+  border: 1px solid #8A2A2B !important
+}
+
+button,
+#api button {
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 16px;
+  font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus,
+#api button:hover,
+#api button:focus {
+  background: var(--brand-focus);
+}
+
+/* Unified button margins */
+button#verifyEmailControl_but_send_code,
+button#passwordResetEmailOtpControl_but_send_code,
+button#signinEmailOtpControl_but_send_code,
+button.sendCode,
+button.verifyCode,
+button.sendNewCode,
+button.changeClaims {
+  margin-top: 16px;
+}
+
+/* Unified split button widths */
+button#verifyEmailControl_but_send_new_code,
+button#verifyEmailControl_but_verify_code,
+button#signinEmailOtpControl_but_send_new_code,
+button#signinEmailOtpControl_but_verify_code,
+#page-pwreset-otp #api button[id$="_but_send_new_code"],
+#page-pwreset-otp #api button[id$="_but_verify_code"] {
+  width: 50%;
+  margin-top: 16px;
+}
+
+.actions,
+#api form {
+  display: grid;
+  gap: 16px;
+}
+
+#api .buttons {
+  display: flex;
+  gap: 16px;
+}
+
+button {
+  width: 100%;
+}
+
+#api ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#api li {
+  margin: 0;
+}
+
+#api .intro {
+  color: #CCCCCC;
+  font-size: 1rem;
+}
+
+div.intro>p {
+  margin-top: 0;
+}
+
+#api .helptext,
+#api .error,
+#api .verificationSuccessText {
+  font-size: 1rem;
+}
+
+#api input[name="verificationCode"] {
+  max-width: 240px;
+  text-align: center;
+  letter-spacing: 0.12em;
+}
+
+div#verifyEmailControl_info_message,
+div#verifyEmailControl_success_message,
+div#verifyEmailControl_error_message,
+div#requiredFieldMissing,
+div#fieldIncorrect,
+div#passwordEntryMismatch {
+  color: #CCC;
+}
+
+.error.itemLevel.show,
+.pw-hint.is-error,
+div#passwordEntryMismatch,
+:is(#page-newpassword, #page-password) #api div#fieldIncorrect {
+  color: #EB5858;
+}
+
+.pw-hint {
+  color: inherit;
+}
+
+.pw-hint.is-success {
+  color: #4CAF50;
+}
+
+/* Style the B2C-native forgot password link to match our design */
+#page-signin #api a#forgotPassword,
+#page-signin #api .options .option {
+  color: var(--brand);
+  font-size: .9rem;
+  text-decoration: none;
+  display: inline-block;
+  /* margin-top: 8px; */
+  padding: 8px 0 16px 0;
+}
+
+#page-signin #api a#forgotPassword:hover,
+#page-signin #api .options .option:hover {
+  color: var(--brand-focus);
+  text-decoration: underline;
+}
+
+a.btn {
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--brand);
+  color: #fff;
+  font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+a.btn:hover,
+a.btn:focus {
+  background: var(--brand-focus);
+  text-decoration: none;
+}
+
+a:link {
+  display: block;
+  color: #00B3FF;
+  padding: 14px 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  /* vertically centers text with icon */
+  justify-content: center;
+  /* centers the whole block */
+  gap: 0.5rem;
+  /* space between icon and text */
+  color: #fff;
+  /* make sure text is white */
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  /* adjust as needed */
+  margin: 0;
+}
+
+.avatar-icon {
+  flex-shrink: 0;
+  /* prevent icon from shrinking */
+}
+
+#verifying_blurb {
+  display: none;
+  background: #fff;
+  /* solid white */
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+/* MFA Radio Options Styling */
+#page-mfa #api .attrEntry {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Each radio input sits inline with its following label */
+#page-mfa #api .attrEntry input[type="radio"] {
+  display: none; /* hide native radio */
+}
+
+/* Style each option label as a full clickable row */
+#page-mfa #api .attrEntry label[id$="_option"] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #c9d6e2;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Custom radio circle */
+#page-mfa #api .attrEntry label[id$="_option"]::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border-radius: 50%;
+  border: 2px solid #c9d6e2;
+  background: #fff;
+}
+
+/* Checked state - target label after checked input */
+#page-mfa #api .attrEntry input[type="radio"]:checked + label[id$="_option"]::before {
+  border-color: var(--brand);
+  background: var(--brand);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* New Password Page Tweaks */
+#page-newpassword #api .attrEntry { margin-bottom: 8px; }
+#pw-match-hint {
+  font-size: .88rem;
+  margin-top: 4px;
+  min-height: 1.2em;
+}
+
+/* Hide specific elements on pages */
+
+#page-verify:has(#verifyEmailControl_but_verify_code:not([style*="display: none"]):not([style*="display:none"])) .intro {
+    display: none !important;
+}
+
+/*Global Hides */
+
+/* GROUP 1: Pages that hide EVERYTHING (Buttons, Change Claims, Errors, and Paragraphs) */
+:is(#page-verify, #page-emailotp, #page-pwreset-otp, #page-phone) :is(#api, .intro) :is(
+  #continue,
+  button[id$="_but_change_claims"],
+  div.error.itemLevel.show,
+  div.error.pageLevel
+),
+
+/* GROUP 2: Hides Continue button only */
+:is(#page-phone) :is(#api, .intro) :is(
+  #continue
+),
+
+/* GROUP 3: Hides intro when errors appear and hides input field errors */
+:is(#page-password, #page-newpassword) #api .attrEntry div.error.itemLevel,
+
+/* GROUP 4: Pages that hide ONLY Paragraphs */
+:is(#page-signin, #page-newpassword, #page-password) .intro p,
+
+/* GROUP 5: True Globals / Unique Specifics */
+#page-alreadyverified #api,
+#api a.helpLink.tiny,
+#page-phone #api :is(button, input):is([id*="call"], [aria-label*="Call"]),
+#page-mfa #api :is(#requiredFieldMissing, div.error.pageLevel) {
+  display: none !important;
+}
+
+:is(#page-password, #page-newpassword):has(#api :is(.error.pageLevel, .error.itemLevel.show, #fieldIncorrect, #passwordEntryMismatch, [id$="_success_message"]):not([style*="display: none"]):not([aria-hidden="true"]):not(:empty)) .intro {
+  display: none !important;
+}
+
+/* Temporarily hide the initial Send Code button on auto-send pages so it doesn't flicker */
+:is(#page-emailotp, #page-phone, #page-pwreset-otp) button[id$="_but_send_code"], [id$="_success_message"] {
+  display: none !important;
+}
+
+#claimVerificationServerError, #fieldIncorrect, #passwordEntryMismatch {
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.attrEntry {
+    display: flex;
+    flex-direction: column;
+}
+
+.attrEntry > input {
+    order: 2;
+}
+
+.attrEntry > .error.itemLevel {
+    order: 3;
+}
+/* 1. Make the field container a flex column */.entry-item, .form-group {
+  display: flex;
+  flex-direction: column;
+}
+/* 2. Set the visual display order */.entry-item label {
+  order: 1;
+  margin-bottom: 4px;
+}
+.entry-item input {
+  order: 2;
+  margin-bottom: 4px;
+}
+/* Error message class (targets Azure AD B2C error elements) */.entry-item .error,.entry-item .item-level,.entry-item [role="alert"] {
+  order: 3;
+  margin-top: 4px;
+}
+
+.entry-item a {
+  order: 4;
+  margin-bottom: 4px;
+}
