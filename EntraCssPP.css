@@ -104,8 +104,8 @@ body::after {
 
 h1 {
   font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
-  font-size: 18px;
-  /* margin: 14px 0 24px; */
+  font-size: 22px;
+  margin: 8px 0 8px;
   color: var(--white);
 }
 
@@ -176,7 +176,7 @@ button,
 #api button {
   height: 44px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 5px;
   background: var(--brand);
   color: #fff;
   font-size: 16px;
@@ -212,6 +212,10 @@ button#signinEmailOtpControl_but_verify_code,
 #page-pwreset-otp #api button[id$="_but_verify_code"] {
   width: 50%;
   margin-top: 16px;
+}
+
+.attr {
+  padding-bottom: 16px;
 }
 
 .actions,
@@ -273,7 +277,8 @@ div#passwordEntryMismatch {
 .pw-hint.is-error,
 div#passwordEntryMismatch,
 :is(#page-newpassword, #page-password) #api div#fieldIncorrect {
-  color: #EB5858;
+  color: #ECA8A8;
+  padding-top: 6px;
 }
 
 .pw-hint {
@@ -304,7 +309,7 @@ div#passwordEntryMismatch,
 a.btn {
   height: 44px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 5px; 
   background: var(--brand);
   color: #fff;
   font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
@@ -339,6 +344,7 @@ a:link {
   /* space between icon and text */
   color: #fff;
   /* make sure text is white */
+  padding-bottom: 32px;
 }
 
 .header h1 {
@@ -380,7 +386,7 @@ a:link {
   gap: 12px;
   padding: 10px 12px;
   border: 1px solid #c9d6e2;
-  border-radius: 12px;
+  border-radius: 5px;
   cursor: pointer;
   width: 100%;
 }
@@ -492,4 +498,11 @@ a:link {
 .entry-item a {
   order: 4;
   margin-bottom: 4px;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 18px;
+  margin-bottom: 0;
+  font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
 }
