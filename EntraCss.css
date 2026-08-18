@@ -53,7 +53,7 @@ body {
   display: grid;
   place-items: center;
   padding: 24px;
-  background-position: -160px 100%;
+  background-position: -130px -200px;
   /* background-size: cover, auto, auto; */
 }
 
@@ -211,8 +211,15 @@ button#signinEmailOtpControl_but_send_new_code,
 button#signinEmailOtpControl_but_verify_code,
 #page-pwreset-otp #api button[id$="_but_send_new_code"],
 #page-pwreset-otp #api button[id$="_but_verify_code"] {
-  width: 50%;
+  width: 100%;
   margin-top: 16px;
+}
+
+button.sendNewCode, #cancel, #api button#cancel {
+  background: var(--bg)!important;
+  color: var(--brand)!important;
+  border: 1px solid var(--brand)!important;
+  margin-top: 8px;
 }
 
 .actions,
@@ -221,10 +228,10 @@ button#signinEmailOtpControl_but_verify_code,
   gap: 16px;
 }
 
-#api .buttons {
+/* #api .buttons {
   display: flex;
   gap: 16px;
-}
+} */
 
 button {
   width: 100%;
@@ -420,49 +427,6 @@ a.btn:focus {
   min-height: 1.2em;
 }
 
-/* Hide specific elements on pages */
-
-#page-verify:has(#verifyEmailControl_but_verify_code:not([style*="display: none"]):not([style*="display:none"])) .intro {
-    display: none !important;
-}
-
-/*Global Hides */
-
-/* GROUP 1: Pages that hide EVERYTHING (Buttons, Change Claims, Errors, and Paragraphs) */
-:is(#page-verify, #page-emailotp, #page-pwreset-otp, #page-phone) :is(#api, .intro) :is(
-  #continue,
-  button[id$="_but_change_claims"],
-  div.error.itemLevel.show,
-  div.error.pageLevel
-),
-
-/* GROUP 2: Hides Continue button only */
-:is(#page-phone) :is(#api, .intro) :is(
-  #continue
-),
-
-/* GROUP 3: Hides intro when errors appear and hides input field errors */
-:is(#page-password, #page-newpassword) #api .attrEntry div.error.itemLevel,
-
-/* GROUP 4: Pages that hide ONLY Paragraphs */
-:is(#page-signin, #page-newpassword, #page-password) .intro p,
-
-/* GROUP 5: True Globals / Unique Specifics */
-#page-alreadyverified #api,
-#api a.helpLink.tiny,
-#page-phone #api :is(button, input):is([id*="call"], [aria-label*="Call"]),
-#page-mfa #api :is(#requiredFieldMissing, div.error.pageLevel) {
-  display: none !important;
-}
-
-:is(#page-password, #page-newpassword):has(#api :is(.error.pageLevel, .error.itemLevel.show, #fieldIncorrect, #passwordEntryMismatch, [id$="_success_message"]):not([style*="display: none"]):not([aria-hidden="true"]):not(:empty)) .intro {
-  display: none !important;
-}
-
-/* Temporarily hide the initial Send Code button on auto-send pages so it doesn't flicker */
-:is(#page-emailotp, #page-phone, #page-pwreset-otp) button[id$="_but_send_code"], [id$="_success_message"] {
-  display: none !important;
-}
 
 .entry-item {
   display: grid;
@@ -512,5 +476,65 @@ a.btn:focus {
 }
 
 .attrEntry > .error.itemLevel {
+    order: 3;
+}
+
+/* Hide specific elements on pages */
+
+#page-verify:has(#verifyEmailControl_but_verify_code:not([style*="display: none"]):not([style*="display:none"])) .intro {
+    display: none !important;
+}
+
+/*Global Hides */
+
+/* GROUP 1: Pages that hide EVERYTHING (Buttons, Change Claims, Errors, and Paragraphs) */
+:is(#page-verify, #page-emailotp, #page-pwreset-otp, #page-phone) :is(#api, .intro) :is(
+  #continue,
+  button[id$="_but_change_claims"],
+  div.error.itemLevel.show,
+  div.error.pageLevel
+),
+
+/* GROUP 2: Hides Continue button only */
+:is(#page-phone) :is(#api, .intro) :is(
+  #continue
+),
+
+/* GROUP 3: Hides intro when errors appear and hides input field errors */
+:is(#page-password, #page-newpassword) #api .attrEntry div.error.itemLevel,
+
+/* GROUP 4: Pages that hide ONLY Paragraphs */
+:is(#page-signin, #page-newpassword, #page-password) .intro p,
+
+/* GROUP 5: True Globals / Unique Specifics */
+#page-alreadyverified #api,
+#api a.helpLink.tiny,
+#page-phone #api :is(button, input):is([id*="call"], [aria-label*="Call"]),
+#page-mfa #api :is(#requiredFieldMissing, div.error.pageLevel) {
+  display: none !important;
+}
+
+:is(#page-password, #page-newpassword):has(#api :is(.error.pageLevel, .error.itemLevel.show, #fieldIncorrect, #passwordEntryMismatch, [id$="_success_message"]):not([style*="display: none"]):not([aria-hidden="true"]):not(:empty)) .intro {
+  display: none !important;
+}
+
+/* Temporarily hide the initial Send Code button on auto-send pages so it doesn't flicker */
+:is(#page-emailotp, #page-phone, #page-pwreset-otp) button[id$="_but_send_code"], 
+:is(#page-emailotp, #page-phone, #page-pwreset-otp) [id$="_success_message"] {
+  display: none !important;
+}
+
+
+
+.attrEntry {
+    display: flex;
+    flex-direction: column;
+}
+
+.attrEntry > input {
+    order: 2;
+}
+
+.attrEntry > p {
     order: 3;
 }
