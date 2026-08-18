@@ -520,35 +520,25 @@ h2 {
 
 
 
-
-<form id="localAccountForm" action="JavaScript:void(0);" class="localAccount" aria-label="This portal provides Fines Victoria partners with access to our services.">
-        <div class="intro">
-          <h2 aria-level="1">
-            This portal provides Fines Victoria partners with access to our services.
-          </h2>
-        </div>
-        <div class="error pageLevel" aria-hidden="true" role="alert" style="display: none;">
-          <p></p>
-        </div>
-        <div class="entry">
+<div class="entry">
           <div class="entry-item">
             <label for="signInName">
               Email address
             </label>
-            <div class="error itemLevel" aria-hidden="true" role="alert" style="display: none;">
-              <p></p>
+            <div class="error itemLevel" aria-hidden="false" role="alert" style="display: block;">
+              <p>Please enter your Email address</p>
             </div>
-            <input type="text" id="signInName" name="Email address" title="Please enter a valid Email address" autofocus="" placeholder="Email address" aria-label="Email address">
+            <input type="text" id="signInName" name="Email address" title="Please enter a valid Email address" autofocus="" placeholder="Email address" aria-label="Email address" class="highlightError">
           </div>
             <div class="entry-item">
               <div class="password-label">
                 <label for="password">Password</label>
               </div>
-              <div class="error itemLevel" aria-hidden="true" style="display: none;">
-                <p role="alert"></p>
+              <div class="error itemLevel" aria-hidden="false" style="display: block;">
+                <p role="alert">Please enter your password</p>
               </div>
-              <input type="password" id="password" name="Password" placeholder="Password" aria-label="Password" autocomplete="current-password" aria-required="true">
-                  <a id="forgotPassword" href="/fesb2c.onmicrosoft.com/B2C_1A_dev_partner_signin/api/CombinedSigninAndSignup/unified?claimsexchange=ForgotPasswordExchange&amp;csrf_token=ODdoZUF1Sm1hL0RTZ0s2TkNTVTU2RGJ3dDBpbzY0RVl5d3BYbzk4aHR6R1ZzUFVpK3I0cVJ6L2dxZEUyMXRGZ0x1b2FKU1ZQaG1id0JwbVJSRWdJY2c9PTsyMDI2LTA4LTE4VDIzOjA4OjM0LjQzNzYwMDhaO0djQlo5QnVrY0NQQUo5aDJEeDUyWHc9PTt7Ik9yY2hlc3RyYXRpb25TdGVwIjoxfQ==&amp;tx=StateProperties=eyJUSUQiOiJlYjY1MzkzMi04MDU1LTRmMzMtYjAzMi00NmYyZTE4MzMyMTQifQ&amp;p=B2C_1A_dev_partner_signin">Forgot your password?</a>
+              <input type="password" id="password" name="Password" placeholder="Password" aria-label="Password" autocomplete="current-password" aria-required="true" class="highlightError">
+                  <a id="forgotPassword" href="/fesb2c.onmicrosoft.com/B2C_1A_dev_partner_signin/api/CombinedSigninAndSignup/unified?claimsexchange=ForgotPasswordExchange&amp;csrf_token=b3hxczZuUmx3Z1pvUk92OEIxa2t4SXhvbGNmSmhzMHo3ODQzYk5jTU01NUphSmlHaE83dFJqb0RwUVZwY3VqMWFBMzZTMUUyVTZmRzlvYlpkbGViM2c9PTsyMDI2LTA4LTE4VDIzOjI1OjI1LjEyMjY0MDVaO1kzVXQvaCtjbkxjc2hKYjV3Mll2a2c9PTt7Ik9yY2hlc3RyYXRpb25TdGVwIjoxfQ==&amp;tx=StateProperties=eyJUSUQiOiJlYjY1MzkzMi04MDU1LTRmMzMtYjAzMi00NmYyZTE4MzMyMTQifQ&amp;p=B2C_1A_dev_partner_signin">Forgot your password?</a>
             </div>
           <div class="working"></div>
 
@@ -557,5 +547,4 @@ h2 {
             <button id="next" type="submit" form="localAccountForm">Sign in</button>
           </div>
         </div>
-      </form>
 
