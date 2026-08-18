@@ -548,3 +548,38 @@ h2 {
           </div>
         </div>
 
+
+.attrEntry {
+    display: flex;
+    flex-direction: column;
+}
+
+.attrEntry > input {
+    order: 2;
+}
+
+.attrEntry > .error.itemLevel {
+    order: 3;
+}
+/* 1. Make the field container a flex column */.entry-item, .form-group {
+  display: flex;
+  flex-direction: column;
+}
+/* 2. Set the visual display order */.entry-item label {
+  order: 1;
+  margin-bottom: 4px;
+}
+.entry-item input {
+  order: 2;
+  margin-bottom: 4px;
+}
+/* Error message class (targets Azure AD B2C error elements) */.entry-item .error,.entry-item .item-level,.entry-item [role="alert"] {
+  order: 3;
+  margin-top: 4px;
+}
+
+.entry-item a {
+  order: 4;
+  margin-bottom: 4px;
+}
+
