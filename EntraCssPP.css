@@ -104,7 +104,7 @@ body::after {
 
 h1 {
   font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
-  font-size: 22px;
+  font-size: 24px;
   margin: 8px 0 8px;
   color: var(--white);
 }
@@ -163,13 +163,78 @@ input[readonly] {
 
 div.error.itemLevel>p {
   margin: 4px 0;
-  color: #E58F8E;
+  color: #ECA8A8;
   font-size: 14px;
 }
 
 /* Set the input border color when it has an error */
 .highlightError {
-  border: 1px solid #8A2A2B !important
+  border: 1px solid #ECA8A8 !important
+}
+
+/* Set error bar, icon and border around page level error */
+/* 1. BASE CARD STYLES FOR PAGE LEVEL ERROR */
+#api .pageLevel,
+#api div.error.pageLevel {
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 14px 16px 14px 68px !important;
+  min-height: 52px !important;
+  box-sizing: border-box !important;
+  margin-bottom: 20px !important;
+}
+
+/* Light text color for dark themes */
+#api .pageLevel p {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* 2. RED VERTICAL BAR */
+#api .pageLevel::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 18px !important;
+  top: 12px !important;
+  bottom: 12px !important;
+  width: 3.5px !important;
+  background-color: #ECA8A8 !important;
+}
+
+/* 3. RED EXCLAMATION ICON (Using mask-image for easy color overrides) */
+#api .pageLevel::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 38px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 21px !important;
+  height: 21px !important;
+
+  /* Color defined here: */
+  background-color: #E58F8E !important;
+
+  /* SVG Mask */
+  -webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjgiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iNSIvPjxsaW5lIHgxPSIzMiIgeTE9IjE4IiB4Mj0iMzIiIHkyPSIzNiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIi8+PHJlY3QgeD0iMjkiIHk9IjQyIiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSJibGFjayIvPjwvc3ZnPg==') !important;
+  mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjgiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iNSIvPjxsaW5lIHgxPSIzMiIgeTE9IjE4IiB4Mj0iMzIiIHkyPSIzNiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIi8+PHJlY3QgeD0iMjkiIHk9IjQyIiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSJibGFjayIvPjwvc3ZnPg==') !important;
+  -webkit-mask-size: contain !important;
+  mask-size: contain !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+}
+
+/* 4. OVERRIDE HIDE RULE (Stays at the very bottom) */
+#api .pageLevel[style*="display: none"],
+#api .pageLevel[style*="display:none"],
+#api .pageLevel[aria-hidden="true"],
+#api div.error.pageLevel[style*="display: none"],
+#api div.error.pageLevel[style*="display:none"] {
+  display: none !important;
 }
 
 button,
@@ -309,7 +374,7 @@ div#passwordEntryMismatch,
 a.btn {
   height: 44px;
   border: 0;
-  border-radius: 5px; 
+  border-radius: 5px;
   background: var(--brand);
   color: #fff;
   font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
@@ -336,26 +401,35 @@ a:link {
 
 .header {
   display: flex;
-  align-items: center;
   /* vertically centers text with icon */
-  justify-content: center;
+  justify-content: left;
   /* centers the whole block */
   gap: 0.5rem;
   /* space between icon and text */
   color: #fff;
   /* make sure text is white */
   padding-bottom: 32px;
+  padding-top: 32px;
 }
 
 .header h1 {
   font-size: 1.5rem;
   /* adjust as needed */
-  margin: 0;
+  margin: 10;
 }
 
-.avatar-icon {
-  flex-shrink: 0;
-  /* prevent icon from shrinking */
+/* Avatar icon */
+.header::before,
+#page-signin .heading h1::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 44px;
+  height: 44px;
+  margin-right: 24px;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMzAiLz48Y2lyY2xlIGN4PSIzMiIgY3k9IjI0IiByPSI5Ii8+PHBhdGggZD0iTTE2IDUwYTIwIDIwIDAgMCAxIDMyIDAiLz48L3N2Zz4=');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 #verifying_blurb {
@@ -417,50 +491,6 @@ a:link {
   min-height: 1.2em;
 }
 
-/* Hide specific elements on pages */
-
-#page-verify:has(#verifyEmailControl_but_verify_code:not([style*="display: none"]):not([style*="display:none"])) .intro {
-    display: none !important;
-}
-
-/*Global Hides */
-
-/* GROUP 1: Pages that hide EVERYTHING (Buttons, Change Claims, Errors, and Paragraphs) */
-:is(#page-verify, #page-emailotp, #page-pwreset-otp, #page-phone) :is(#api, .intro) :is(
-  #continue,
-  button[id$="_but_change_claims"],
-  div.error.itemLevel.show,
-  div.error.pageLevel
-),
-
-/* GROUP 2: Hides Continue button only */
-:is(#page-phone) :is(#api, .intro) :is(
-  #continue
-),
-
-/* GROUP 3: Hides intro when errors appear and hides input field errors */
-:is(#page-password, #page-newpassword) #api .attrEntry div.error.itemLevel,
-
-/* GROUP 4: Pages that hide ONLY Paragraphs */
-:is(#page-signin, #page-newpassword, #page-password) .intro p,
-
-/* GROUP 5: True Globals / Unique Specifics */
-#page-alreadyverified #api,
-#api a.helpLink.tiny,
-#page-phone #api :is(button, input):is([id*="call"], [aria-label*="Call"]),
-#page-mfa #api :is(#requiredFieldMissing, div.error.pageLevel) {
-  display: none !important;
-}
-
-:is(#page-password, #page-newpassword):has(#api :is(.error.pageLevel, .error.itemLevel.show, #fieldIncorrect, #passwordEntryMismatch, [id$="_success_message"]):not([style*="display: none"]):not([aria-hidden="true"]):not(:empty)) .intro {
-  display: none !important;
-}
-
-/* Temporarily hide the initial Send Code button on auto-send pages so it doesn't flicker */
-:is(#page-emailotp, #page-phone, #page-pwreset-otp) button[id$="_but_send_code"], [id$="_success_message"] {
-  display: none !important;
-}
-
 #claimVerificationServerError, #fieldIncorrect, #passwordEntryMismatch {
   padding: 16px;
   margin-top: 16px;
@@ -504,82 +534,161 @@ h2 {
   margin-top: 0;
   font-size: 18px;
   margin-bottom: 0;
-  font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-weight: normal;
+  font-family: "VIC Regular", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
 }
 
 
+/* Hide specific elements on pages */
 
-
-
-
-
-
-
-
-
-
-
-
-<div class="entry">
-          <div class="entry-item">
-            <label for="signInName">
-              Email address
-            </label>
-            <div class="error itemLevel" aria-hidden="false" role="alert" style="display: block;">
-              <p>Please enter your Email address</p>
-            </div>
-            <input type="text" id="signInName" name="Email address" title="Please enter a valid Email address" autofocus="" placeholder="Email address" aria-label="Email address" class="highlightError">
-          </div>
-            <div class="entry-item">
-              <div class="password-label">
-                <label for="password">Password</label>
-              </div>
-              <div class="error itemLevel" aria-hidden="false" style="display: block;">
-                <p role="alert">Please enter your password</p>
-              </div>
-              <input type="password" id="password" name="Password" placeholder="Password" aria-label="Password" autocomplete="current-password" aria-required="true" class="highlightError">
-                  <a id="forgotPassword" href="/fesb2c.onmicrosoft.com/B2C_1A_dev_partner_signin/api/CombinedSigninAndSignup/unified?claimsexchange=ForgotPasswordExchange&amp;csrf_token=b3hxczZuUmx3Z1pvUk92OEIxa2t4SXhvbGNmSmhzMHo3ODQzYk5jTU01NUphSmlHaE83dFJqb0RwUVZwY3VqMWFBMzZTMUUyVTZmRzlvYlpkbGViM2c9PTsyMDI2LTA4LTE4VDIzOjI1OjI1LjEyMjY0MDVaO1kzVXQvaCtjbkxjc2hKYjV3Mll2a2c9PTt7Ik9yY2hlc3RyYXRpb25TdGVwIjoxfQ==&amp;tx=StateProperties=eyJUSUQiOiJlYjY1MzkzMi04MDU1LTRmMzMtYjAzMi00NmYyZTE4MzMyMTQifQ&amp;p=B2C_1A_dev_partner_signin">Forgot your password?</a>
-            </div>
-          <div class="working"></div>
-
-
-          <div class="buttons">
-            <button id="next" type="submit" form="localAccountForm">Sign in</button>
-          </div>
-        </div>
-
-
-.attrEntry {
-    display: flex;
-    flex-direction: column;
+#page-verify:has(#verifyEmailControl_but_verify_code:not([style*="display: none"]):not([style*="display:none"])) .intro {
+    display: none !important;
 }
 
-.attrEntry > input {
-    order: 2;
+/*Global Hides */
+
+/* GROUP 1: Pages that hide EVERYTHING (Buttons, Change Claims, Errors, and Paragraphs) */
+:is(#page-verify, #page-emailotp, #page-pwreset-otp, #page-phone) :is(#api, .intro) :is(
+  #continue,
+  button[id$="_but_change_claims"],
+  div.error.itemLevel.show,
+  div.error.pageLevel
+),
+
+/* GROUP 2: Hides Continue button only */
+:is(#page-phone) :is(#api, .intro) :is(
+  #continue
+),
+
+/* GROUP 3: Hides intro when errors appear and hides input field errors */
+:is(#page-password, #page-newpassword) #api .attrEntry div.error.itemLevel,
+
+/* GROUP 4: Pages that hide ONLY Paragraphs */
+:is(#page-signin, #page-newpassword, #page-password) .intro p,
+
+/* GROUP 5: True Globals / Unique Specifics */
+#page-alreadyverified #api,
+#api a.helpLink.tiny,
+#page-phone #api :is(button, input):is([id*="call"], [aria-label*="Call"]),
+#page-mfa #api :is(#requiredFieldMissing, div.error.pageLevel) {
+  display: none !important;
 }
 
-.attrEntry > .error.itemLevel {
-    order: 3;
-}
-/* 1. Make the field container a flex column */.entry-item, .form-group {
-  display: flex;
-  flex-direction: column;
-}
-/* 2. Set the visual display order */.entry-item label {
-  order: 1;
-  margin-bottom: 4px;
-}
-.entry-item input {
-  order: 2;
-  margin-bottom: 4px;
-}
-/* Error message class (targets Azure AD B2C error elements) */.entry-item .error,.entry-item .item-level,.entry-item [role="alert"] {
-  order: 3;
-  margin-top: 4px;
+:is(#page-password, #page-newpassword):has(#api :is(.error.pageLevel, .error.itemLevel.show, #fieldIncorrect, #passwordEntryMismatch, [id$="_success_message"]):not([style*="display: none"]):not([aria-hidden="true"]):not(:empty)) .intro {
+  display: none !important;
 }
 
-.entry-item a {
-  order: 4;
-  margin-bottom: 4px;
+/* Temporarily hide the initial Send Code button on auto-send pages so it doesn't flicker */
+:is(#page-emailotp, #page-phone, #page-pwreset-otp) button[id$="_but_send_code"],
+:is(#page-emailotp, #page-phone, #page-pwreset-otp) [id$="_success_message"] {
+  display: none !important;
 }
 
+@media (max-width: 440px) {
+  body::after {
+    background-color: #000;
+    bottom: 16px;
+    right: 0px;
+    width: 46px;
+    height: 50px;
+    padding-right: 110px;
+  }
+  body::before {
+    top: 20px;
+    left: 36px;
+    width: 138px;
+    height: 60px;
+  }
+
+  .card {
+    width: min(580px, 92vw);
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 25px 26px;
+    border: 1px solid var(--white);
+    border-radius: 42px;
+  }
+  h1{
+    font-size: 20px;
+  }
+  h2{
+    font-family: "VIC Regular", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+    font-weight: normal;
+  }
+}
+
+@media (min-width: 441px) and (max-width: 768px) {
+  body::after {
+    background-color: #000;
+    bottom: 16px;
+    right: 0px;
+    width: 46px;
+    height: 50px;
+    padding-right: 110px;
+  }
+  body::before {
+    top: 20px;
+    left: 36px;
+    width: 138px;
+    height: 60px;
+  }
+
+  h1{
+    font-size: 24px;
+  }
+  h2{
+    font-family: "VIC Regular", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+    font-weight: normal;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  body::after {
+    background-color: #000;
+    bottom: 16px;
+    right: 0px;
+    width: 46px;
+    height: 50px;
+    padding-right: 110px;
+  }
+  body::before {
+    top: 20px;
+    left: 36px;
+    width: 152px;
+    height: 60px;
+  }
+
+  h1{
+    font-size: 24px;
+  }
+  h2{
+    font-family: "VIC Regular", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+    font-weight: normal;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  body::after {
+    background-color: #000;
+    bottom: 16px;
+    right: 0px;
+    width: 46px;
+    height: 50px;
+    padding-right: 110px;
+  }
+  body::before {
+    top: 20px;
+    left: 36px;
+    width: 172px;
+    height: 60px;
+  }
+
+  h1{
+    font-size: 26px;
+  }
+  h2{
+    font-family: "VIC Regular", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+    font-weight: normal;
+  }
+}
