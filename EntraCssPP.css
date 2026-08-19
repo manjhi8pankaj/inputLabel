@@ -692,3 +692,40 @@ h2 {
     font-weight: normal;
   }
 }
+
+
+
+
+
+
+
+
+
+<div class="entry">
+          <div class="entry-item">
+            <label for="signInName">
+              Email address
+            </label>
+            <div class="error itemLevel" aria-hidden="true" role="alert" style="display: none;">
+              <p></p>
+            </div>
+            <input type="text" id="signInName" name="Email address" title="Please enter a valid Email address" autofocus="" placeholder="Email address" aria-label="Email address">
+          </div>
+            <div class="entry-item">
+              <div class="password-label">
+                <label for="password">Password</label>
+              </div>
+              <div class="error itemLevel" aria-hidden="true" style="display: none;">
+                <p role="alert"></p>
+              </div>
+              <input type="password" id="password" name="Password" placeholder="Password" aria-label="Password" autocomplete="current-password" aria-required="true">
+                  <a id="forgotPassword" href="/fesb2c.onmicrosoft.com/B2C_1A_dev_debtor_signin/api/CombinedSigninAndSignup/unified?claimsexchange=ForgotPasswordExchange&amp;csrf_token=QkRWZjU3Qk94U0l5SExWdHZjbVc4K1B6QkpGT09ISTc2ZTdrMXltdXV2bEU5Q000N0s1YnlFWFpiT3NWRGtTWVZpbERkd3l1eEVYOTIrTGdqNXZlbnc9PTsyMDI2LTA4LTE5VDE0OjUxOjExLjQ3NTkxNVo7VldtaGJ5STl5a2NlT1ZybndlalN6QT09O3siT3JjaGVzdHJhdGlvblN0ZXAiOjF9&amp;tx=StateProperties=eyJUSUQiOiJlMWY0NDM2NS03NGNjLTQ4ZDctYTQwOS01MzUyZTk4NzcyMjYifQ&amp;p=B2C_1A_dev_debtor_signin">Forgot your password?</a>
+            </div>
+          <div class="working"></div>
+
+
+          <div class="buttons">
+            <button id="next" type="submit" form="localAccountForm">Sign in</button>
+          </div>
+        </div>
+
