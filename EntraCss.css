@@ -49,12 +49,14 @@ body {
   margin: 0;
   font: 16px/1.45 "VIC Regular", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
   color: var(--text);
-  background: url('https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/debtor-bg.svg') no-repeat;
+  background:
+    url('https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/ST/images/debtor-bg.svg') center top no-repeat,
+    radial-gradient(1200px 1200px at 85% -20%, var(--bg2), transparent 50%),
+    linear-gradient(180deg, var(--bg), #FFFFFF);
   display: grid;
   place-items: center;
   padding: 24px;
-  background-position: -130px -200px;
-  /* background-size: cover, auto, auto; */
+  background-size: cover, auto, auto;
 }
 
 body::before,
@@ -86,14 +88,13 @@ body::after {
   -webkit-mask: url(https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/vic-logo.svg) center/contain no-repeat;
   mask: url(https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/vic-logo.svg) center/contain no-repeat;
   background-color: black;
-  padding-right: 200px;
 }
 
 @media (min-width: 1250px) and (min-height: 800px),
 (min-width: 1050px) and (max-height: 800px),
 (min-height: 0px) and (max-height: 516px) {
   body::after {
-    background-color: #000;
+    background-color: white;
   }
 }
 
@@ -171,6 +172,695 @@ div.error.itemLevel>p {
   margin: 4px 0;
   color: #8A2A2B;
   font-size: 14px;
+}
+
+/* Set error bar, icon and border around page level error */
+/* 1. BASE CARD STYLES FOR PAGE LEVEL ERROR */
+#api .pageLevel,
+#api div.error.pageLevel {
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 14px 16px 14px 68px !important;
+  min-height: 52px !important;
+  box-sizing: border-box !important;
+  margin-bottom: 20px !important;
+}
+
+#api .pageLevel p {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* 2. RED VERTICAL BAR */
+#api .pageLevel::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 18px !important;
+  top: 12px !important;
+  bottom: 12px !important;
+  width: 3.5px !important;
+  background-color: #8A2A2B !important; /* Main Bar Color */
+}
+
+/* 3. RED EXCLAMATION ICON (Using mask-image for easy color overrides) */
+#api .pageLevel::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 38px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 21px !important;
+  height: 21px !important;
+
+  /* Color defined here: */
+  background-color: #8A2A2B !important;
+
+  /* SVG Mask */
+  -webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjgiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iNSIvPjxsaW5lIHgxPSIzMiIgeTE9IjE4IiB4Mj0iMzIiIHkyPSIzNiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIi8+PHJlY3QgeD0iMjkiIHk9IjQyIiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSJibGFjayIvPjwvc3ZnPg==') !important;
+  mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjgiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iNSIvPjxsaW5lIHgxPSIzMiIgeTE9IjE4IiB4Mj0iMzIiIHkyPSIzNiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIi8+PHJlY3QgeD0iMjkiIHk9IjQyIiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSJibGFjayIvPjwvc3ZnPg==') !important;
+  -webkit-mask-size: contain !important;
+  mask-size: contain !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+}
+
+/* 4. OVERRIDE HIDE RULE (Stays at the very bottom) */
+#api .pageLevel[style*="display: none"],
+#api .pageLevel[style*="display:none"],
+#api .pageLevel[aria-hidden="true"],
+#api div.error.pageLevel[style*="display: none"],
+#api div.error.pageLevel[style*="display:none"] {
+  display: none !important;
+}
+
+button,
+#api button {
+  height: 44px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 16px;
+  font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus,
+#api button:hover,
+#api button:focus {
+  background: var(--brand-focus);
+}
+
+/* Unified button margins */
+button#verifyEmailControl_but_send_code,
+button#passwordResetEmailOtpControl_but_send_code,
+button#signinEmailOtpControl_but_send_code,
+button.sendCode,
+button.verifyCode,
+button.sendNewCode,
+button.changeClaims {
+  margin-top: 16px;
+}
+
+/* Unified split button widths */
+button#verifyEmailControl_but_send_new_code,
+button#verifyEmailControl_but_verify_code,
+button#signinEmailOtpControl_but_send_new_code,
+button#signinEmailOtpControl_but_verify_code,
+#page-pwreset-otp #api button[id$="_but_send_new_code"],
+#page-pwreset-otp #api button[id$="_but_verify_code"] {
+  width: 100%;
+  margin-top: 16px;
+}
+
+button.sendNewCode, #cancel, #api button#cancel {
+  background: var(--bg)!important;
+  color: var(--brand)!important;
+  border: 1px solid var(--brand)!important;
+  margin-top: 8px;
+}
+
+.actions,
+#api form {
+  display: grid;
+  gap: 16px;
+}
+
+/* #api .buttons {
+  display: flex;
+  gap: 16px;
+} */
+
+button {
+  width: 100%;
+}
+
+#api ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#api li {
+  margin: 0;
+}
+
+#api .intro :is(p, h2) {
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.45;
+  margin: 4px 0 0 0;
+}
+
+#api .helptext,
+#api .error,
+#api .verificationSuccessText {
+  font-size: 1rem;
+}
+
+#api input[name="verificationCode"] {
+  max-width: 260px;
+  text-align: center;
+  letter-spacing: 0.12em;
+}
+
+/* Page MFA Specific Layout & Positioning */
+#page-mfa #api .attrEntry div.error.itemLevel {
+  order: 99;
+  margin-top: 8px;
+}
+
+div#verifyEmailControl_info_message,
+div#verifyEmailControl_success_message,
+div#verifyEmailControl_error_message,
+div#requiredFieldMissing,
+div#fieldIncorrect,
+div#passwordEntryMismatch {
+  color: #333;
+}
+
+.error.itemLevel.show,
+.pw-hint.is-error,
+div#passwordEntryMismatch,
+:is(#page-newpassword, #page-password) #api div#fieldIncorrect {
+  color: #8A2A2B;
+}
+
+.pw-hint {
+  color: inherit;
+}
+
+.pw-hint.is-success {
+  color: #2e7d32;
+}
+
+/* Style the B2C-native forgot password link to match our design */
+#page-signin #api a#forgotPassword,
+#page-signin #api .options .option {
+  color: var(--brand);
+  font-size: .9rem;
+  text-decoration: none;
+  display: inline-block;
+  /* margin-top: 8px; */
+  padding: 8px 0 16px 0;
+}
+
+#page-signin #api a#forgotPassword:hover,
+#page-signin #api .options .option:hover {
+  color: var(--brand-focus);
+  text-decoration: underline;
+}
+
+a.btn {
+  height: 44px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--brand);
+  color: #fff;
+  font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+a.btn:hover,
+a.btn:focus {
+  background: var(--brand-focus);
+  text-decoration: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  /* vertically centers text with icon */
+  justify-content: center;
+  /* centers the whole block */
+  gap: 0.5rem;
+  /* space between icon and text */
+  color: #fff;
+  /* make sure text is white */
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  /* adjust as needed */
+  margin: 0;
+}
+
+.avatar-icon {
+  flex-shrink: 0;
+  /* prevent icon from shrinking */
+}
+
+#verifying_blurb {
+  display: none;
+  background: #fff;
+  /* solid white */
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+/* MFA Radio Options Styling */
+#page-mfa #api .attrEntry {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Each radio input sits inline with its following label */
+#page-mfa #api .attrEntry input[type="radio"] {
+  display: none; /* hide native radio */
+}
+
+/* Style each option label as a full clickable row */
+#page-mfa #api .attrEntry label[id$="_option"] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #c9d6e2;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Custom radio circle */
+#page-mfa #api .attrEntry label[id$="_option"]::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border-radius: 50%;
+  border: 2px solid #c9d6e2;
+  background: #fff;
+}
+
+/* Checked state - target label after checked input */
+#page-mfa #api .attrEntry input[type="radio"]:checked + label[id$="_option"]::before {
+  border-color: var(--brand);
+  background: var(--brand);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* Page Phone Specific Styling */
+#page-phone #api {
+  text-align: left;
+}
+
+#page-phone #api h1,
+#page-phone #api .intro {
+  text-align: left;
+}
+
+/* New Password Page Tweaks */
+#page-newpassword #api .attrEntry { margin-bottom: 8px; }
+#pw-match-hint {
+  font-size: .88rem;
+  margin-top: 4px;
+  min-height: 1.2em;
+}
+
+
+.entry-item {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* Email/password label */
+.entry-item > label,
+.entry-item > .password-label {
+  grid-row: 1;
+}
+
+/* Put the input before the error message */
+.entry-item > input {
+  grid-row: 2;
+}
+
+/* Error appears directly below input */
+.entry-item > .error.itemLevel {
+  grid-row: 3;
+  margin-top: 4px;
+}
+
+
+
+.entry {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry-item:nth-child(2) {
+  display: contents;
+}
+
+.entry-item:nth-child(1) {
+  order: 1;
+}
+
+#password {
+  order: 2;
+}
+
+#forgotPassword {
+  order: 4;
+}
+
+.working {
+  order: 5;
+}
+
+.buttons {
+  order: 3;
+}
+
+
+
+/* Set the input border color when it has an error */
+.highlightError {
+  border: 1px solid #8A2A2B !important
+}
+
+#api .pageLevel {
+   border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 16px;
+}
+
+#claimVerificationServerError, #fieldIncorrect, #passwordEntryMismatch {
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.attrEntry {
+    display: flex;
+    flex-direction: column;
+}
+
+.attrEntry > input {
+    order: 2;
+}
+
+.attrEntry > .error.itemLevel {
+    order: 3;
+}
+
+/* Hide specific elements on pages */
+
+#page-verify:has(#verifyEmailControl_but_verify_code:not([style*="display: none"]):not([style*="display:none"])) .intro {
+    display: none !important;
+}
+
+/*Global Hides */
+
+/* GROUP 1: Pages that hide EVERYTHING (Buttons, Change Claims, Errors, and Paragraphs) */
+:is(#page-verify, #page-emailotp, #page-pwreset-otp, #page-phone) :is(#api, .intro) :is(
+  #continue,
+  button[id$="_but_change_claims"],
+  div.error.itemLevel.show,
+  div.error.pageLevel
+),
+
+/* GROUP 2: Hides Continue button only */
+:is(#page-phone) :is(#api, .intro) :is(
+  #continue
+),
+
+/* GROUP 3: Hides intro when errors appear and hides input field errors */
+:is(#page-password, #page-newpassword) #api .attrEntry div.error.itemLevel,
+
+/* GROUP 4: Pages that hide ONLY Paragraphs */
+:is(#page-signin, #page-newpassword, #page-password) .intro p,
+
+/* GROUP 5: True Globals / Unique Specifics */
+#page-alreadyverified #api,
+#api a.helpLink.tiny,
+#page-phone #api :is(button, input):is([id*="call"], [aria-label*="Call"]),
+#page-mfa #api :is(#requiredFieldMissing, div.error.pageLevel) {
+  display: none !important;
+}
+
+:is(#page-password, #page-newpassword):has(#api :is(.error.pageLevel, .error.itemLevel.show, #fieldIncorrect, #passwordEntryMismatch, [id$="_success_message"]):not([style*="display: none"]):not([aria-hidden="true"]):not(:empty)) .intro {
+  display: none !important;
+}
+
+/* Temporarily hide the initial Send Code button on auto-send pages so it doesn't flicker */
+:is(#page-emailotp, #page-phone, #page-pwreset-otp) button[id$="_but_send_code"],
+:is(#page-emailotp, #page-phone, #page-pwreset-otp) [id$="_success_message"] {
+  display: none !important;
+}
+
+
+:root {
+  --bg: #FFFFFF;
+  /* primary background */
+  --bg2: #FFFFFF;
+  /* gradient shade */
+  --card: #FFFFFF;
+  /* card background */
+  --text: #323232;
+  /* headings/text */
+  --muted: #6c8195;
+  /* helper text */
+  --brand: #004C97;
+  /* button */
+  --brand-focus: #0072CE;
+  /* button focus/hover */
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .15);
+  --white: #ffffff;
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+}
+
+/* Font-face declaration */
+@font-face {
+  font-family: "VIC Regular";
+  src: url('https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/fonts/WEBFONT/Regular/VIC-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VIC SemiBold";
+  src: url('https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/fonts/WEBFONT/SemiBold/VIC-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font: 16px/1.45 "VIC Regular", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  background:
+    url('https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/ST/images/debtor-bg.svg') center top no-repeat,
+    radial-gradient(1200px 1200px at 85% -20%, var(--bg2), transparent 50%),
+    linear-gradient(180deg, var(--bg), #FFFFFF);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background-size: cover, auto, auto;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 10;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* Makes logos appear black */
+}
+
+/* Top left logo */
+body::before {
+  top: 48px;
+  left: 48px;
+  width: 175px;
+  height: 62px;
+  background-image: url('https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/Logo.svg');
+}
+
+/* Bottom right logo */
+body::after {
+  bottom: 48px;
+  right: 48px;
+  width: 80px;
+  height: 64px;
+  -webkit-mask: url(https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/vic-logo.svg) center/contain no-repeat;
+  mask: url(https://b2cdevpublicstorage.blob.core.windows.net/b2c-ui/DEV/images/vic-logo.svg) center/contain no-repeat;
+  background-color: black;
+}
+
+@media (min-width: 1250px) and (min-height: 800px),
+(min-width: 1050px) and (max-height: 800px),
+(min-height: 0px) and (max-height: 516px) {
+  body::after {
+    background-color: white;
+  }
+}
+
+.card {
+  width: min(580px, 92vw);
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px 48px;
+  border: 1px solid var(--white);
+  border-radius: 4px;
+}
+
+h1 {
+  font-family: "VIC SemiBold", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  margin: 22px 0 4px;
+  color: var(--text);
+  text-align: left;
+}
+
+h2 {
+  margin-top: 0;
+  text-align: left;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 14px;
+  height: 36px;
+}
+
+.center {
+  text-align: center;
+}
+
+.small {
+  font-size: .9rem;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-top: 6px;
+  margin-bottom: 32px;
+}
+
+label,
+#api label {
+  display: block;
+  font-family: "VIC Regular", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin: .75rem 0 .25rem;
+}
+
+input,
+#api input[type="email"],
+#api input[type="text"],
+#api input[type="password"] {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #c9d6e2;
+  border-radius: 5px;
+  padding: 0 12px;
+  font-size: 16px;
+}
+
+input[readonly] {
+  background: #f6f9fc;
+  color: #5d6d7e;
+}
+
+div.error.itemLevel>p {
+  margin: 4px 0;
+  color: #8A2A2B;
+  font-size: 14px;
+}
+
+/* Set error bar, icon and border around page level error */
+/* 1. BASE CARD STYLES FOR PAGE LEVEL ERROR */
+#api .pageLevel,
+#api div.error.pageLevel {
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  background-color: transparent !important;
+  border: 1px solid #D9D9D6 !important;
+  border-radius: 5px !important;
+  padding: 14px 16px 14px 68px !important;
+  min-height: 52px !important;
+  box-sizing: border-box !important;
+  margin-bottom: 20px !important;
+}
+
+#api .pageLevel p {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* 2. RED VERTICAL BAR */
+#api .pageLevel::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 18px !important;
+  top: 12px !important;
+  bottom: 12px !important;
+  width: 3.5px !important;
+  background-color: #8A2A2B !important; /* Main Bar Color */
+}
+
+/* 3. RED EXCLAMATION ICON (Using mask-image for easy color overrides) */
+#api .pageLevel::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 38px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 21px !important;
+  height: 21px !important;
+
+  /* Color defined here: */
+  background-color: #8A2A2B !important;
+
+  /* SVG Mask */
+  -webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjgiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iNSIvPjxsaW5lIHgxPSIzMiIgeTE9IjE4IiB4Mj0iMzIiIHkyPSIzNiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIi8+PHJlY3QgeD0iMjkiIHk9IjQyIiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSJibGFjayIvPjwvc3ZnPg==') !important;
+  mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSI+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjgiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iNSIvPjxsaW5lIHgxPSIzMiIgeTE9IjE4IiB4Mj0iMzIiIHkyPSIzNiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI2IiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIi8+PHJlY3QgeD0iMjkiIHk9IjQyIiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSJibGFjayIvPjwvc3ZnPg==') !important;
+  -webkit-mask-size: contain !important;
+  mask-size: contain !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+}
+
+/* 4. OVERRIDE HIDE RULE (Stays at the very bottom) */
+#api .pageLevel[style*="display: none"],
+#api .pageLevel[style*="display:none"],
+#api .pageLevel[aria-hidden="true"],
+#api div.error.pageLevel[style*="display: none"],
+#api div.error.pageLevel[style*="display:none"] {
+  display: none !important;
 }
 
 button,
@@ -519,22 +1209,143 @@ a.btn:focus {
 }
 
 /* Temporarily hide the initial Send Code button on auto-send pages so it doesn't flicker */
-:is(#page-emailotp, #page-phone, #page-pwreset-otp) button[id$="_but_send_code"], 
+:is(#page-emailotp, #page-phone, #page-pwreset-otp) button[id$="_but_send_code"],
 :is(#page-emailotp, #page-phone, #page-pwreset-otp) [id$="_success_message"] {
   display: none !important;
 }
 
 
-
-.attrEntry {
-    display: flex;
-    flex-direction: column;
+/* Arrange the main container children from top to bottom */
+.entry {
+  display: flex;
+  flex-direction: column;
 }
 
-.attrEntry > input {
-    order: 2;
+/* .entry-item:nth-child(1) {
+  order: 1;
+} */
+
+/* flatten the .entry-item */
+.entry-item:nth-child(2) {
+  display: contents;
 }
 
-.attrEntry > p {
-    order: 3;
+.entry-item:nth-child(2) > .password-label {
+  order: 1;
+}
+
+/* Place password after email */
+#password {
+  order: 2;
+}
+
+.entry-item:nth-child(2) > .error.itemLevel {
+  order: 3;
+}
+
+#forgotPassword {
+  order: 4;
+}
+
+.working {
+  order: 5;
+}
+
+.buttons {
+  order: 3;
+}
+
+.entry > .buttons {
+  margin: 24px 0 12px 0;
+}
+
+
+@media (max-width: 440px) {
+  body::before {
+    top: 12px;
+    left: 30px;
+    width: 132px;
+  }
+  body::after {
+    bottom: 12px;
+    right: 28px;
+    width: 80px;
+    height: 64px;
+    background-color: black;
+  }
+}
+
+@media (min-width: 441px) and (max-width: 640px) {
+  body::before {
+    top: 15px;
+    left: 36px;
+    width: 135px;
+  }
+  body::after {
+    bottom: 12px;
+    right: 32px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  body::before {
+    top: 18px;
+    left: 48px;
+    width: 156px;
+  }
+  body::after {
+    bottom: 18px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  body::before {
+    top: 20px;
+    left: 48px;
+    width: 160px;
+  }
+  body::after {
+    bottom: 15px;
+    right: 104px;
+    width: 86px;
+    background-color: #000;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1243px) {
+  body::before {
+    top: 20px;
+    left: 48px;
+    width: 168px;
+  }
+  body::after {
+    bottom: 22px;
+    right: 112px;
+    width: 96px;
+    background-color: #000;
+  }
+}
+
+@media (min-width: 1244px) and (max-width: 1440px) {
+  body::before {
+    top: 20px;
+    left: 48px;
+    width: 168px;
+  }
+  body::after {
+    bottom: 22px;
+      right: 24px;
+      width: 96px;
+      background-color: #fff;
+  }
+}
+
+@media (min-width: 1441px) and (max-width: 2560px) {
+
+  body::after {
+    bottom: 48px;
+    right: 48px;
+    width: 190px;
+    background-color: #fff;
+  }
 }
